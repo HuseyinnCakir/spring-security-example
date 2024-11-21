@@ -10,6 +10,7 @@ import java.util.List;
 public class NoteServiceImpl implements NoteService{
     @Autowired
     private NoteRepository noteRepository;
+    @Autowired
     AuditLogService auditLogService;
     @Override
     public Note createNoteForUser(String username, String content) {
