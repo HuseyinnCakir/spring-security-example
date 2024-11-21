@@ -1,7 +1,7 @@
 package com.secure.notes.services;
 
 import com.secure.notes.dtos.UserDTO;
-import com.secure.notes.models.User;
+import com.secure.notes.entity.User;
 
 import java.util.List;
 

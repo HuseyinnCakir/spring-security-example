@@ -1,9 +1,9 @@
 package com.secure.notes.services;
 
 import com.secure.notes.dtos.UserDTO;
-import com.secure.notes.models.AppRole;
-import com.secure.notes.models.Role;
-import com.secure.notes.models.User;
+import com.secure.notes.entity.AppRole;
+import com.secure.notes.entity.Role;
+import com.secure.notes.entity.User;
 import com.secure.notes.repositories.RoleRepository;
 import com.secure.notes.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

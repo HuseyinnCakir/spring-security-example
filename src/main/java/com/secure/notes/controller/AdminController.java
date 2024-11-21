@@ -2,7 +2,7 @@ package com.secure.notes.controller;
 
 
 import com.secure.notes.dtos.UserDTO;
-import com.secure.notes.models.User;
+import com.secure.notes.entity.User;
 import com.secure.notes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

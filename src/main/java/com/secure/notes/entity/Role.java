@@ -1,4 +1,4 @@
-package com.secure.notes.models;
+package com.secure.notes.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

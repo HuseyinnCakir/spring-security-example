@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import com.secure.notes.models.User;
+import com.secure.notes.entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,6 +1,6 @@
 package com.secure.notes.controller;
 
-import com.secure.notes.models.User;
+import com.secure.notes.entity.User;
 import com.secure.notes.security.jwt.JwtUtils;
 import com.secure.notes.security.request.LoginRequest;
 import com.secure.notes.security.response.LoginResponse;
