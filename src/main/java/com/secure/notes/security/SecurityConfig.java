@@ -44,8 +44,8 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf ->
-                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
-                        //.ignoringRequestMatchers("/api/auth/public/**")); // example code to deactivate csrf
+                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .ignoringRequestMatchers("/api/auth/public/**"));
         http.authorizeHttpRequests((requests) ->
                 requests
                         //.requestMatchers("/api/admin/**").hasRole("ADMIN") URL BASED RESTRICTİON
