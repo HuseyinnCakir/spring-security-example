@@ -4,6 +4,7 @@ import com.secure.notes.entity.User;
 import com.secure.notes.security.jwt.JwtUtils;
 import com.secure.notes.security.request.LoginRequest;
 import com.secure.notes.security.response.LoginResponse;
+import com.secure.notes.security.response.MessageResponse;
 import com.secure.notes.security.response.UserInfoResponse;
 import com.secure.notes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -97,4 +99,29 @@ public class AuthController {
         return (userDetails != null) ? userDetails.getUsername() : "";
     }
 
+    @PostMapping("/public/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestParam String email) {
+        try {
+            userService.generatePasswordResetToken(email);
+            return ResponseEntity.ok(new MessageResponse("Password reset email sent!"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new MessageResponse("Error sending password reset email"));
+        }
+
+    }
+
+    @PostMapping("/public/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestParam String token,
+                                           @RequestParam String newPassword) {
+
+        try {
+            userService.resetPassword(token, newPassword);
+            return ResponseEntity.ok(new MessageResponse("Password reset successful"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new MessageResponse(e.getMessage()));
+        }
+    }
 }
