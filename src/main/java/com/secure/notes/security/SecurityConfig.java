@@ -51,7 +51,7 @@ public class SecurityConfig {
                         .ignoringRequestMatchers("/api/auth/public/**"));
         http.authorizeHttpRequests((requests) ->
                 requests
-                        //.requestMatchers("/api/admin/**").hasRole("ADMIN") URL BASED RESTRICTİON
+                        //.requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/csrf-token").permitAll()
                         .requestMatchers("/api/auth/public/**").permitAll()
                         .requestMatchers("/oauth2/**").permitAll()
@@ -61,10 +61,10 @@ public class SecurityConfig {
                 });
         http.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-       // http.formLogin(withDefaults());
         //http.csrf(AbstractHttpConfigurer::disable);
         http.addFilterBefore(new CustomLoggingFilter(), UsernamePasswordAuthenticationFilter.class);
         //http.addFilterAfter(new RequestValidationFilter(), CustomLoggingFilter.class);
+        //http.formLogin(withDefaults());
         http.httpBasic(withDefaults());
         return http.build();
     }

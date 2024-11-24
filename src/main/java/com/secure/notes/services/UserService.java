@@ -3,6 +3,8 @@ package com.secure.notes.services;
 import com.secure.notes.dtos.UserDTO;
 import com.secure.notes.entity.User;
 import com.secure.notes.entity.Role;
+import jakarta.mail.MessagingException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +29,7 @@ public interface UserService {
 
     void updatePassword(Long userId, String password);
 
-    void generatePasswordResetToken(String email);
+    void generatePasswordResetToken(String email) throws MessagingException;
 
     void resetPassword(String token, String newPassword);
 

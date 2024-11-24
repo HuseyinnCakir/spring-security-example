@@ -23,10 +23,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.*;
+
 
 @Component
 @RequiredArgsConstructor
@@ -116,6 +114,10 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         String email = (String) attributes.get("email");
         System.out.println("OAuth2LoginSuccessHandler: " + username + " : " + email);
 
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        User user = userService.findByEmail(email).orElseThrow(
+                () -> new RuntimeException("User not found"));
+        authorities.add(new SimpleGrantedAuthority(user.getRole().getRoleName().name()));
         // Create UserDetailsImpl instance
         UserDetailsImpl userDetails = new UserDetailsImpl(
                 null,
@@ -123,9 +125,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
                 email,
                 null,
                 false,
-                oauth2User.getAuthorities().stream()
-                        .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
-                        .collect(Collectors.toList())
+                authorities
         );
 
         // Generate JWT token
