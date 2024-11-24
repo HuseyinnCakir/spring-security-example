@@ -3,6 +3,7 @@ package com.secure.notes.services;
 import com.secure.notes.dtos.UserDTO;
 import com.secure.notes.entity.User;
 import com.secure.notes.entity.Role;
+import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
 import jakarta.mail.MessagingException;
 
 import java.util.List;
@@ -36,4 +37,12 @@ public interface UserService {
     Optional<User> findByEmail(String email);
 
     User registerUser(User user);
+
+    GoogleAuthenticatorKey generate2FASecret(Long userId);
+
+    boolean validate2FACode(Long userId, int code);
+
+    void enable2FA(Long userId);
+
+    void disable2FA(Long userId);
 }
